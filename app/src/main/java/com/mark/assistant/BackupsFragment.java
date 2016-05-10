@@ -10,10 +10,11 @@ import android.view.ViewGroup;
 /**
  * Created by admin on 2016/05/09.
  */
-public class MainFragment extends Fragment {
+public class BackupsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view=inflater.inflate(R.layout.fragment_backups,container,false);
+        return view;
     }
 }

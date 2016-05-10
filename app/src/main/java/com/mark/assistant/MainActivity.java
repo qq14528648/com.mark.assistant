@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 .setMode(BottomNavigationBar.MODE_SHIFTING).initialise();
 
         //setFirstSelectedPosition
- bottomNavigationBar.setActiveColor(R.color.colorPrimary);
+            bottomNavigationBar.setActiveColor(R.color.colorPrimary);
         bottomNavigationBar.setTabSelectedListener(this);
 //
 //        case R.id.menu_github:

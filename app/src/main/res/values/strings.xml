@@ -1,10 +1,24 @@
 <resources>
     <string name="app_name">Assistant</string>
+
+    <!-- Strings  bootom title -->
     <string name="bottom_nav_title_guide">Guide</string>
     <string name="bottom_nav_title_backup">Backups</string>
     <string name="bottom_nav_title_start">Start</string>
-    <string name="bottom_nav_title_personal">Personal</string>
 
+    <!-- Strings guide pag -->
+    <string name="guide_package">Package:</string>
+    <string name="guide_version">Version:</string>
+    <string name="guide_name">Name:</string>
+    <string name="guide_server">Server:</string>
+    <string name="guide_icon">Icon</string>
+    <string name="guide_last_date">Last Login Date:</string>
+    <string name="guide_info">App Information</string>
+    <string name="guide_none">None</string>
+    <string name="guide_app__choice">选择白猫计划</string>
+    <string name="guide_server_short">Server shorts</string>s
+    <string name="guide_server_prompt">Server prompt</string>
+    <string name="guide_remarks">Remarks:</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -96,5 +110,22 @@
     </string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="change_app">Change App</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="ok">OK</string>
 
 </resources>
