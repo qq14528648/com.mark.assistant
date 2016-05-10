@@ -34,6 +34,14 @@ import java.util.List;
  */
 public class GuideFragment extends Fragment {
     public static final String ASSISTANT_GUIDE = "assistant_guide";
+    public static final String GUIDE_PACKAGE = "guide_package";
+    public static final String DEFAUL_PACKAGE_NAME = "jp.colopl.wcat";
+    private static final String GUIDE_SERVER = "guide_server";
+
+    private static final String GUIDE_REMARKS = "guide_remarks";
+    private static final String GUIDE_LAST_DATE = "guide_last_date";
+    private static final String DEFAUL_REMARKS = "none";
+    private static final String DEFAUL_LAST_DATE = new Date().toString();
     private GuideAppManager.AppInfoProvider mAppInfoProvider;
     private ImageView mAppImageView;
     private ImageView mAppInfoImageButton;
@@ -53,8 +61,6 @@ public class GuideFragment extends Fragment {
         mAppInfoProvider = new GuideAppManager.AppInfoProvider(getActivity());
         mSharedPreferences = getActivity().getSharedPreferences(
                 ASSISTANT_GUIDE, Context.MODE_PRIVATE);
-
-       GuideAppManager.AppInfo info= mAppInfoProvider.getAppInfo(  mSharedPreferences.getString("guide_package","jp.colopl.wcat"));
 
 
     }
@@ -109,13 +115,21 @@ public class GuideFragment extends Fragment {
 
                             return;
                         } else {
-                            mAppImageView.setImageDrawable(appChoiceAdpater.getItem(i).getIcon());
-                            mNameTextView.setText(appChoiceAdpater.getItem(i).getAppName());
-                            mPackageTextView.setText(appChoiceAdpater.getItem(i).getPackageName());
-                            mVersionTextView.setText(appChoiceAdpater.getItem(i).getVersion());
+                            GuideAppManager.AppInfo info = appChoiceAdpater.getItem(i);
+                            String date = new Date().toString();
+                            mAppImageView.setImageDrawable(info.getIcon());
+                            mNameTextView.setText(info.getAppName());
+                            mPackageTextView.setText(info.getPackageName());
+                            mVersionTextView.setText(info.getVersion());
                             mServerTextView.setText(server.getText().toString());
                             mRemarksTextView.setText(remarks.getText().toString());
-                            mLastDateTextView.setText(new Date().toString());
+                            mLastDateTextView.setText(date);
+                            SharedPreferences.Editor editor = mSharedPreferences.edit();
+                            editor.putString(GUIDE_PACKAGE, info.getPackageName());
+                            editor.putString(GUIDE_SERVER, server.getText().toString());
+                            editor.putString(GUIDE_REMARKS, remarks.getText().toString());
+                            editor.putString(GUIDE_LAST_DATE, date);
+                            editor.commit();
                             dialogInterface.dismiss();
                         }
 
@@ -141,7 +155,23 @@ public class GuideFragment extends Fragment {
         mLastDateTextView = (TextView) view.findViewById(R.id.lastDateTextView);
         mRemarksTextView = (TextView) view.findViewById(R.id.remarksTextView);
 
-        return view;
+        String packageName = mSharedPreferences.getString(GUIDE_PACKAGE, DEFAUL_PACKAGE_NAME);
+        if (!TextUtils.isEmpty(packageName)) {
+            String server = mSharedPreferences.getString(GUIDE_SERVER, getString(R.string.defaul_server));
+            String remarks = mSharedPreferences.getString(GUIDE_REMARKS, DEFAUL_REMARKS);
+            String lastDate = mSharedPreferences.getString(GUIDE_LAST_DATE, DEFAUL_LAST_DATE);
+            GuideAppManager.AppInfo info = mAppInfoProvider.getAppInfo(packageName);
+            mAppImageView.setImageDrawable(info.getIcon());
+            mNameTextView.setText(info.getAppName());
+            mPackageTextView.setText(info.getPackageName());
+            mVersionTextView.setText(info.getVersion());
+            mServerTextView.setText(server);
+            mRemarksTextView.setText(remarks);
+            mLastDateTextView.setText(lastDate);
+        } else {
+            guideApp();
+        }
+ return view;
     }
 
 
